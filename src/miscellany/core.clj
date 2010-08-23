@@ -4,6 +4,7 @@
   (:use hiccup.page-helpers)
   (:use ring.middleware.reload)
   (:use ring.middleware.stacktrace)
+  (:use ring.middleware.multipart-params)
   (:use ring.util.response)
   (:require [compojure.route :as route])
   (:use miscellany.middleware)
@@ -25,6 +26,8 @@
   (GET "/" [] (view-documents))
   (GET "/new-document" [] (form-new-document))
   (POST "/new-document" [path type tags content] (save-new-document path type tags content))
+  (GET "/upload-document" [] (form-upload-document))
+  (POST "/upload-document" [path tags upload] (save-upload-document path tags upload))
   (GET "/:path" [path] (view-document path)))
 
 (def app
@@ -36,5 +39,6 @@
 	 (wrap-reload '[miscellany.middleware miscellany.core])
 	 (wrap-bounce-favicon)
 	 (wrap-exception-logging)
+	 (wrap-multipart-params)
 	 (wrap-if production? wrap-failsafe)
 	 (wrap-if development? wrap-stacktrace)))

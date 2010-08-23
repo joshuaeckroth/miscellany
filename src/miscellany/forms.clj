@@ -22,3 +22,21 @@
   (db-new-document path type tags content)
   (redirect (str "/" path)))
 
+(defn form-upload-document []
+  (view-layout
+   [:h2 "Upload document"]
+   (form-to {:enctype "multipart/form-data"}
+	    [:post "/upload-document"]
+	    (label "path" "Path:")
+	    (text-field "path")
+	    (label "tags" "Tags:")
+	    (text-field "tags")
+	    (label "upload" "Upload:")
+	    (file-upload "upload")
+	    (submit-button "Upload"))))
+
+(defn save-upload-document [path tags upload]
+  (db-new-document-with-attachment path tags upload)
+  (redirect (str "/" path)))
+
+
