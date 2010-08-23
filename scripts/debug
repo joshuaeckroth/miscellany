@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export PORT=8080
+export APP_ENV=debug
+exec java -cp "clojure-couchdb-0.2.2-ne.jar;lib\*;src" clojure.main scripts/run.clj

@@ -24,7 +24,7 @@
 (defroutes handler
   (GET "/" [] (view-documents))
   (GET "/new-document" [] (form-new-document))
-  (POST "/new-document" [path type content] (save-new-document path type content))
+  (POST "/new-document" [path type tags content] (save-new-document path type tags content))
   (GET "/:path" [path] (view-document path)))
 
 (def app

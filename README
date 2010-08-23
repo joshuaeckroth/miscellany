@@ -6,6 +6,8 @@ FIXME: write description
 
 FIXME: write
 
+Bookmarklet "save snippet": javascript:u=document.location.href;t=document.title;s=window.getSelection();f=document.createElement("form");f.setAttribute("method", "post");f.setAttribute("action", "http://localhost:8080/new-document");dp=document.createElement("input");dp.setAttribute("type", "hidden");dp.setAttribute("name", "path");dp.setAttribute("value", "snippet");f.appendChild(dp);dc=document.createElement("input");dc.setAttribute("type", "hidden");dc.setAttribute("name", "content");dc.setAttribute("value", t+" - "+u+" - "+s);f.appendChild(dc);document.body.appendChild(f);f.submit();
+
 ## Installation
 
 FIXME: write
